@@ -1,15 +1,25 @@
+using eTickets.DAL.Context;
+using eTickets.Pl.Helpers;
+using Microsoft.EntityFrameworkCore;
+
 namespace eTickets
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<eTicketsDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+            await ApplySeeding.ApplySeedingAsync(app);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
