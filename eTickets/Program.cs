@@ -1,3 +1,5 @@
+using eTickets.BLL.Interfaces;
+using eTickets.BLL.Repositories;
 using eTickets.DAL.Context;
 using eTickets.Pl.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,10 @@ namespace eTickets
             });
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IActorRepository, ActorRepository>();
+            builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
             await ApplySeeding.ApplySeedingAsync(app);

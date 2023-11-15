@@ -8,6 +8,7 @@ namespace eTickets.BLL.Interfaces
 {
     public interface IUnitOfWork
     {
-        public IActorRepository ActorRepository { get; }
+        public IActorRepository ActorRepository { get; set; }
+        public IProducerRepository ProducerRepository { get; set; }
     }
 }
