@@ -19,7 +19,7 @@ namespace eTickets.Pl.Controllers
         public IActionResult Index()
         {
             var producers = _unitOfWork.ProducerRepository.GetAll();
-            var mappedProducers = _mapper.Map<ProducerViewModel>(producers);
+            var mappedProducers = _mapper.Map<IEnumerable<ProducerViewModel>>(producers);
 
             return View(mappedProducers);
         }

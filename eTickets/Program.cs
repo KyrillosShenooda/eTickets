@@ -2,7 +2,9 @@ using eTickets.BLL.Interfaces;
 using eTickets.BLL.Repositories;
 using eTickets.DAL.Context;
 using eTickets.Pl.Helpers;
+using eTickets.Pl.Mapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eTickets
 {
@@ -23,6 +25,8 @@ namespace eTickets
             builder.Services.AddScoped<IActorRepository, ActorRepository>();
             builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
 
             var app = builder.Build();
             await ApplySeeding.ApplySeedingAsync(app);

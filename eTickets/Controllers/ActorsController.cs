@@ -18,7 +18,7 @@ namespace eTickets.Pl.Controllers
         public IActionResult Index()
         {
             var actors = _unitOfWork.ActorRepository.GetAll();
-            var mappedActors = _mapper.Map<ActorViewModel>(actors);
+            var mappedActors = _mapper.Map<IEnumerable<ActorViewModel>>(actors);
             return View(mappedActors);
         }
     }
